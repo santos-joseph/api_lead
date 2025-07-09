@@ -1,0 +1,8 @@
+flask
+python-dotenv
+flask-cors
+pymongo[srv]
+requests
+werkzeug
+pyjwt
+pydantic
