@@ -293,7 +293,7 @@ def meta_webhook_handler():
                             payload_data = {
                                 "customer": {
                                     "name": mapped_data.get("full_name", "Nome não fornecido"),
-                                    "phone": mapped_data.get("phone_number", ""),
+                                    "phone": mapped_data.get("whatsapp_number", ""),
                                     "email": mapped_data.get("email", ""),
                                     "cep": mapped_data.get("zip_code", "")
                                 },
