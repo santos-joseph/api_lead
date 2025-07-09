@@ -412,8 +412,7 @@ def find_nearest_store_route():
         return jsonify({"message": "Ocorreu um erro interno ao buscar a loja.", "error": str(e)}), 500
 
 @app.route("/stores/<store_id>", methods=["PUT"])
-@admin_required
-def update_store(current_user, store_id):
+def update_store( store_id):
     try:
         store_data = StoreModel(**request.get_json())
         update_payload = store_data.dict(by_alias=True, exclude_unset=True, exclude={'id'})
@@ -428,8 +427,7 @@ def update_store(current_user, store_id):
         return jsonify({"message": "Erro interno do servidor", "error": str(e)}), 500
 
 @app.route("/stores/<store_id>", methods=["DELETE"])
-@admin_required
-def delete_store(current_user, store_id):
+def delete_store( store_id):
     try:
         result = stores_collection.delete_one({"_id": ObjectId(store_id)})
         if result.deleted_count:
@@ -443,8 +441,7 @@ def delete_store(current_user, store_id):
 # Estas rotas podem ser usadas para testes ou para integrar com outros sistemas que não a Meta.
 
 @app.route("/leads/assign", methods=["POST"])
-@token_required # Protegida para uso interno
-def create_and_assign_lead(current_user):
+def create_and_assign_lead():
     try:
         payload = PublicLeadPayload(**request.get_json())
         client_coords = geolocation_service.get_coords_from_cep(payload.customer.cep)
